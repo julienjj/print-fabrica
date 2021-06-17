@@ -1,0 +1,35 @@
+# Imprime de uma lista excluindo repetidos
+
+import os, re, time
+from tkinter import filedialog
+from tkinter import messagebox
+from tkinter import *
+root = Tk()
+root.withdraw()
+
+
+nome_total=[]
+
+
+file_select = filedialog.askopenfilename(title="Selecione a lista")
+
+with open (file_select,"r") as file1:
+    nome=[]
+    nome=file1.readlines()
+file1.close()
+
+for i in range(0,len(nome)):
+    nome_total.append(nome[i].replace('\n',''))
+    nome_total=list(dict.fromkeys(nome_total))
+
+folder_selected = filedialog.askdirectory(initialdir='c://',title="arquivos pdf, impressora padrao")
+
+for j in range(0,len(nome_total)):
+    nome_print=folder_selected+"/"+nome_total[j]
+    try:
+        os.startfile(nome_print, "print")
+    except:
+        messagebox.showinfo(title='faltou',message=nome_print)
+    time.sleep(2.5)
+    
+    
